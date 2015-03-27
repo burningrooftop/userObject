@@ -9,9 +9,8 @@ run "functionLibrary", #lib
 '
 ' Location of the default user database
 '
-'UserDatabase$ = "projects" + #lib pathSeparator$() + "userObject_project" + #lib pathSeparator$() + "users.db"
 
-UserDatabase$ = DefaultDir$ + #lib pathSeparator$() + "databases" + #lib pathSeparator$() + "users.db"
+UserDatabase$ = "projects" + #lib pathSeparator$() + "userObject_project" + #lib pathSeparator$() + "users.db"
 
 global #db, UserDatabase$, ErrorMessage$, Result, SmtpHost$, SmtpPassword$, FromAddress$, Order$
 global ApplicationName$
