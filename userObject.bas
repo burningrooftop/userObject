@@ -9,7 +9,9 @@ run "functionLibrary", #lib
 '
 ' Location of the default user database
 '
-UserDatabase$ = "projects" + #lib pathSeparator$() + "userObject_project" + #lib pathSeparator$() + "users.db"
+'UserDatabase$ = "projects" + #lib pathSeparator$() + "userObject_project" + #lib pathSeparator$() + "users.db"
+
+UserDatabase$ = DefaultDir$ + #lib pathSeparator$() + "databases" + #lib pathSeparator$() + "users.db"
 
 global #db, UserDatabase$, ErrorMessage$, Result, SmtpHost$, SmtpPassword$, FromAddress$, Order$
 global ApplicationName$
@@ -227,10 +229,15 @@ function lostPassword(username$)
     goto [endFunction]
   end if
   
+  if Email$ = "" then
+    ErrorMessage$ = "No email address available for this user."
+    goto [endFunction]
+  end if
+
   password$ = randomPassword$()
   if setPassword(password$) = 0 then goto [endFunction]
 
-  call sendEmail Email$, "Password Reset Successful" "Your password reset has been successful. Yor new password is """ + password$ + """."
+  call sendEmail Email$, "Password Reset Successful" "Your password reset has been successful. Your new password is """ + password$ + """."
 
   call clearUser
 
